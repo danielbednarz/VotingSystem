@@ -21,6 +21,6 @@ namespace VotingSystem.WebAPI
             return Ok(voters);
         }
 
-
+      
     }
 }

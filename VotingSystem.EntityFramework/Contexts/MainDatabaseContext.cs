@@ -14,14 +14,13 @@ namespace VotingSystem.EntityFramework
         
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Voter> Voters { get; set; }
+        public DbSet<Voting> Votings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Candidate>().HasKey(x => x.Id);
-            modelBuilder.Entity<Voter>().HasKey(x => x.Id);
         }
     }
 }

@@ -18,9 +18,20 @@ namespace VotingSystem.Data.Repositories
         {
             _context.Set<T>().Add(entity);
         }
+
+        public async Task AddAsync(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
+        }
+
         public void AddRange(IEnumerable<T> entities)
         {
             _context.Set<T>().AddRange(entities);
+        }
+
+        public async Task AddRangeAsync(IEnumerable<T> entities)
+        {
+            await _context.Set<T>().AddRangeAsync(entities);
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
@@ -65,14 +76,14 @@ namespace VotingSystem.Data.Repositories
         {
             _context.Set<T>().RemoveRange(entities);
         }
-        public int Save()
+        public bool Save()
         {
-            return _context.SaveChanges();
+            return _context.SaveChanges() > 0;
         }
 
-        public Task<int> SaveAsync()
+        public async Task<bool> SaveAsync()
         {
-            return _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

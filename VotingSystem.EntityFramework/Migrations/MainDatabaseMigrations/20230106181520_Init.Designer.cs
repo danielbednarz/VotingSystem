@@ -11,7 +11,7 @@ using VotingSystem.EntityFramework;
 namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
 {
     [DbContext(typeof(MainDatabaseContext))]
-    [Migration("20230106154626_Init")]
+    [Migration("20230106181520_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,9 +35,6 @@ namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("Votes")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -63,6 +60,25 @@ namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
                     b.HasKey("Id");
 
                     b.ToTable("Voters");
+                });
+
+            modelBuilder.Entity("VotingSystem.Domain.Voting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CandidateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VoterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Votings");
                 });
 #pragma warning restore 612, 618
         }

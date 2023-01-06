@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using VotingSystem.Application.Abstraction;
+using VotingSystem.Application.Services;
 using VotingSystem.Data.Abstraction;
 using VotingSystem.Data.Repositories;
 using VotingSystem.EntityFramework;
+using VotingSystem.EntityFramework.Seed;
 
 namespace VotingSystem.WebAPI
 {
@@ -12,6 +15,9 @@ namespace VotingSystem.WebAPI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<IVoterRepository, VoterRepository>();
+            builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
+            builder.Services.AddScoped<IVotingRepository, VotingRepository>();
+            builder.Services.AddScoped<IVotingService, VotingService>();
 
             builder.Services.AddControllers();
 
@@ -31,11 +37,14 @@ namespace VotingSystem.WebAPI
             {
                 var context = services.GetRequiredService<MainDatabaseContext>();
                 context.Database.Migrate();
+
+                Seed.AddExampleData(context);
             }
             catch (Exception ex)
             {
                 throw new Exception("An error occurred during migration");
             }
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

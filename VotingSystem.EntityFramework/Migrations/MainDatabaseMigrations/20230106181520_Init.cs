@@ -14,8 +14,7 @@ namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Votes = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,6 +34,20 @@ namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
                 {
                     table.PrimaryKey("PK_Voters", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Votings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VoterId = table.Column<int>(type: "int", nullable: false),
+                    CandidateId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Votings", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -44,6 +57,9 @@ namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
 
             migrationBuilder.DropTable(
                 name: "Voters");
+
+            migrationBuilder.DropTable(
+                name: "Votings");
         }
     }
 }

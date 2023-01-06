@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.Application.Abstraction\VotingSystem.Application.Abstraction.csproj" />
     <ProjectReference Include="..\VotingSystem.Data.Abstraction\VotingSystem.Data.Abstraction.csproj" />
-    <ProjectReference Include="..\VotingSystem.EntityFramework\VotingSystem.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

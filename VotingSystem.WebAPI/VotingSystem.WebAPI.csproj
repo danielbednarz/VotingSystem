@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -15,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.Application.Abstraction\VotingSystem.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\VotingSystem.Application.Services\VotingSystem.Application.Services.csproj" />
     <ProjectReference Include="..\VotingSystem.Data.Abstraction\VotingSystem.Data.Abstraction.csproj" />
     <ProjectReference Include="..\VotingSystem.Data.Repositories\VotingSystem.Data.Repositories.csproj" />
     <ProjectReference Include="..\VotingSystem.EntityFramework\VotingSystem.EntityFramework.csproj" />
