@@ -15,5 +15,10 @@ namespace VotingSystem.Data.Repositories
         {
             return await _context.Votings.AnyAsync(x => x.VoterId == voterId);
         }
+
+        public async Task<int> GetCandidateVotingCount(int candidateId)
+        {
+            return await _context.Votings.Where(x => x.CandidateId == candidateId).CountAsync();
+        }
     }
 }

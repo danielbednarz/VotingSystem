@@ -15,7 +15,9 @@ namespace VotingSystem.WebAPI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<IVoterRepository, VoterRepository>();
+            builder.Services.AddScoped<IVoterService, VoterService>();
             builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
+            builder.Services.AddScoped<ICandidateService, CandidateService>();
             builder.Services.AddScoped<IVotingRepository, VotingRepository>();
             builder.Services.AddScoped<IVotingService, VotingService>();
 
