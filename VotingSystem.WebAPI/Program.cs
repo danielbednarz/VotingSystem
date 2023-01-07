@@ -5,6 +5,7 @@ using VotingSystem.Data.Abstraction;
 using VotingSystem.Data.Repositories;
 using VotingSystem.EntityFramework;
 using VotingSystem.EntityFramework.Seed;
+using VotingSystem.WebAPI.Core;
 
 namespace VotingSystem.WebAPI
 {
@@ -14,12 +15,7 @@ namespace VotingSystem.WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddScoped<IVoterRepository, VoterRepository>();
-            builder.Services.AddScoped<IVoterService, VoterService>();
-            builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
-            builder.Services.AddScoped<ICandidateService, CandidateService>();
-            builder.Services.AddScoped<IVotingRepository, VotingRepository>();
-            builder.Services.AddScoped<IVotingService, VotingService>();
+            CoreBindings.Add(builder.Services);
 
             builder.Services.AddControllers();
 

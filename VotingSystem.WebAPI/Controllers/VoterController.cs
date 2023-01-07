@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VotingSystem.Application.Abstraction;
-using VotingSystem.Data.Abstraction;
 using VotingSystem.Domain;
 
 namespace VotingSystem.WebAPI
