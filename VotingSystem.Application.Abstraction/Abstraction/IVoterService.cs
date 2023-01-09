@@ -4,7 +4,7 @@ namespace VotingSystem.Application.Abstraction
 {
     public interface IVoterService
     {
-        public Task<List<Voter>> GetAllVoters();
+        public Task<List<VoterVM>> GetAllVoters();
         public Task<int> AddVoter(string name);
     }
 }

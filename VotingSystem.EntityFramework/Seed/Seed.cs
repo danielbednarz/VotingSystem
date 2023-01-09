@@ -21,15 +21,11 @@ namespace VotingSystem.EntityFramework.Seed
             {
                 new Voter
                 {
-                    Name = "Daniel"
+                    Name = "Peppa"
                 },
                 new Voter
                 {
-                    Name = "Adam"
-                },
-                new Voter
-                {
-                    Name = "Karolina"
+                    Name = "Rumcajs"
                 }
             };
 

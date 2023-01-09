@@ -7,17 +7,30 @@ namespace VotingSystem.Application.Services
     public class CandidateService : ICandidateService
     {
         private readonly ICandidateRepository _candidateRepository;
+        private readonly IVotingRepository _votingRepository;
 
-        public CandidateService(ICandidateRepository candidateRepository)
+        public CandidateService(ICandidateRepository candidateRepository, IVotingRepository votingRepository)
         {
             _candidateRepository = candidateRepository;
+            _votingRepository = votingRepository;
         }
 
-        public async Task<List<Candidate>> GetAllCandidates()
+        public async Task<List<CandidateVM>> GetAllCandidates()
         {
             List<Candidate> candidates = await _candidateRepository.GetAllAsync();
+            List<CandidateVM> candidateVMs = new();
 
-            return candidates;
+            foreach (Candidate candidate in candidates)
+            {
+                candidateVMs.Add(new CandidateVM
+                {
+                    Id = candidate.Id,
+                    Name = candidate.Name,
+                    VotingCount = await _votingRepository.GetCandidateVotingCount(candidate.Id)
+                });
+            }
+
+            return candidateVMs;
         }
 
         public async Task<int> AddCandidate(string name)

@@ -14,9 +14,9 @@ namespace VotingSystem.WebAPI
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllVoters()
+        public async Task<ActionResult<List<VoterVM>>> GetAllVoters()
         {
-            List<Voter> voters = await _voterService.GetAllVoters();
+            List<VoterVM> voters = await _voterService.GetAllVoters();
 
             return Ok(voters);
         }

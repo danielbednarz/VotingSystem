@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <h1>Voting app</h1>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Has voted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let voter of voters">
+            <td>{{ voter.name }}</td>
+            <td>{{ voter.hasVoted ? "v" : "x" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let candidate of candidates">
+            <td>{{ candidate.name }}</td>
+            <td>{{ candidate.votingCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr class="divider my-4" />
+  <div class="row">
+    <h1>Vote!</h1>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <select class="form-select" [(ngModel)]="selectedVoter">
+        <option value="0" selected>I am</option>
+        <option
+          *ngFor="let voter of voters"
+          [value]="voter.id"
+          [label]="voter.name"
+        ></option>
+      </select>
+    </div>
+    <div class="col-3">
+      <select class="form-select" [(ngModel)]="selectedCandidate">
+        <option value="0" selected>I vote for</option>
+        <option
+          *ngFor="let candidate of candidates"
+          [value]="candidate.id"
+          [label]="candidate.name"
+        ></option>
+      </select>
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary" (click)="onClickSubmit()" [disabled]="selectedVoter === 0 || selectedCandidate === 0">
+        Submit!
+      </button>
+    </div>
+    <div class="row" *ngIf="alreadyVotedException">
+      <p style="color: red;">The voter has already voted!</p>
+    </div>
+  </div>
+</div>

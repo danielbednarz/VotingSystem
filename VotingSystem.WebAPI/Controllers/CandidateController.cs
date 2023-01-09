@@ -14,9 +14,9 @@ namespace VotingSystem.WebAPI
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCandidates()
+        public async Task<ActionResult<List<CandidateVM>>> GetAllCandidates()
         {
-            List<Candidate> candidates = await _candidateService.GetAllCandidates();
+            List<CandidateVM> candidates = await _candidateService.GetAllCandidates();
 
             return Ok(candidates);
         }

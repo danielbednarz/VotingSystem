@@ -11,7 +11,7 @@ using VotingSystem.EntityFramework;
 namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
 {
     [DbContext(typeof(MainDatabaseContext))]
-    [Migration("20230106181520_Init")]
+    [Migration("20230109213954_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,9 +48,6 @@ namespace VotingSystem.EntityFramework.Migrations.MainDatabaseMigrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("HasVoted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

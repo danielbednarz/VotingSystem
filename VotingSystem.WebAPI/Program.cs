@@ -18,6 +18,7 @@ namespace VotingSystem.WebAPI
             CoreBindings.Add(builder.Services);
 
             builder.Services.AddControllers();
+            builder.Services.AddCors();
 
             builder.Services.AddDbContext<MainDatabaseContext>(options =>
             {
@@ -52,7 +53,11 @@ namespace VotingSystem.WebAPI
             }
 
             app.UseAuthorization();
-
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials());
 
             app.MapControllers();
 

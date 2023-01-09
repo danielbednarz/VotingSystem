@@ -7,17 +7,30 @@ namespace VotingSystem.Application.Services
     public class VoterService : IVoterService
     {
         private readonly IVoterRepository _voterRepository;
+        private readonly IVotingRepository _votingRepository;
 
-        public VoterService(IVoterRepository voterRepository)
+        public VoterService(IVoterRepository voterRepository, IVotingRepository votingRepository)
         {
             _voterRepository = voterRepository;
+            _votingRepository = votingRepository;
         }
 
-        public async Task<List<Voter>> GetAllVoters()
+        public async Task<List<VoterVM>> GetAllVoters()
         {
-            List<Voter> votes = await _voterRepository.GetAllAsync();
+            List<Voter> voters = await _voterRepository.GetAllAsync();
+            List<VoterVM> voterVMs = new();
 
-            return votes;
+            foreach (Voter voter in voters)
+            {
+                voterVMs.Add(new VoterVM
+                {
+                    Id = voter.Id,
+                    Name = voter.Name,
+                    HasVoted = await _votingRepository.IsVoterAlreadyVoted(voter.Id)
+                });
+            }
+
+            return voterVMs;
         }
 
         public async Task<int> AddVoter(string name)
