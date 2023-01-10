@@ -35,6 +35,11 @@ namespace VotingSystem.Application.Services
 
         public async Task<int> AddCandidate(string name)
         {
+            if (await _candidateRepository.IsCandidateAlreadyExists(name))
+            {
+                throw new Exception("Candidate with given name already exists");
+            }
+
             Candidate candidate = new()
             {
                 Name = name

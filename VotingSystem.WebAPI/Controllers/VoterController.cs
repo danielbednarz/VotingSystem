@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VotingSystem.Application.Abstraction;
-using VotingSystem.Domain;
 
 namespace VotingSystem.WebAPI
 {
@@ -22,7 +21,7 @@ namespace VotingSystem.WebAPI
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddVoter([FromBody] string name)
+        public async Task<IActionResult> AddVoter(string name)
         {
             int voterId = await _voterService.AddVoter(name);
 

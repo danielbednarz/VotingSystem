@@ -1,8 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using VotingSystem.Application.Abstraction;
-using VotingSystem.Application.Services;
-using VotingSystem.Data.Abstraction;
-using VotingSystem.Data.Repositories;
 using VotingSystem.EntityFramework;
 using VotingSystem.EntityFramework.Seed;
 using VotingSystem.WebAPI.Core;

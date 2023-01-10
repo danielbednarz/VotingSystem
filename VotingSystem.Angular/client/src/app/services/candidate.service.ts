@@ -14,4 +14,8 @@ export class CandidateService {
   getCandidates() {
     return this.httpClient.get<Candidate[]>(this.baseUrl + 'Candidate');
   }
+
+  addCandidate(candidateName: string) {
+    return this.httpClient.post(this.baseUrl + 'Candidate?name=' + candidateName, {});
+  }
 }

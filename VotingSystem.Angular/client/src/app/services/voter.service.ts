@@ -15,4 +15,8 @@ export class VoterService {
     return this.httpClient.get<Voter[]>(this.baseUrl + 'Voter');
   }
 
+  addVoter(voterName: string) {
+    return this.httpClient.post(this.baseUrl + 'Voter?name=' + voterName, {});
+  }
+
 }

@@ -17,6 +17,10 @@ export class HomeComponent implements OnInit {
   selectedVoter: number = 0;
   selectedCandidate: number = 0;
   alreadyVotedException: boolean = false;
+  voterAlreadyExistsException: boolean = false;
+  candidateAlreadyExistsException: boolean = false;
+  voterNameToAdd: string = '';
+  candidateNameToAdd: string = '';
 
   constructor(
     private voterService: VoterService,
@@ -51,15 +55,46 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  onClickSubmit() {
-    this.votingService.addVote(this.selectedVoter, this.selectedCandidate).subscribe(() => {
-      this.getVoters();
-      this.getCandidates();
-      this.alreadyVotedException = false;
-    },
-    (error) => {
-      this.alreadyVotedException = true;
-    });
+  addVote() {
+    this.votingService
+      .addVote(this.selectedVoter, this.selectedCandidate)
+      .subscribe(
+        () => {
+          this.getVoters();
+          this.getCandidates();
+          this.alreadyVotedException = false;
+        },
+        (error) => {
+          this.alreadyVotedException = true;
+        }
+      );
   }
 
+  addVoter() {
+    this.voterService.addVoter(this.voterNameToAdd).subscribe(
+      () => {
+        this.getVoters();
+        this.voterAlreadyExistsException = false;
+        this.voterNameToAdd = '';
+      },
+      (error) => {
+        console.log(error.error);
+        this.voterAlreadyExistsException = true;
+      }
+    );
+  }
+
+  addCandidate() {
+    this.candidateService.addCandidate(this.candidateNameToAdd).subscribe(
+      () => {
+        this.getCandidates();
+        this.candidateAlreadyExistsException = false;
+        this.candidateNameToAdd = '';
+      },
+      (error) => {
+        console.log(error.error);
+        this.candidateAlreadyExistsException = true;
+      }
+    );
+  }
 }

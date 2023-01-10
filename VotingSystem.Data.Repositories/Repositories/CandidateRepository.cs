@@ -1,4 +1,5 @@
-﻿using VotingSystem.Data.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using VotingSystem.Data.Abstraction;
 using VotingSystem.Domain;
 using VotingSystem.EntityFramework;
 
@@ -10,5 +11,9 @@ namespace VotingSystem.Data.Repositories
         {
         }
 
+        public async Task<bool> IsCandidateAlreadyExists(string name)
+        {
+            return await _context.Candidates.AnyAsync(x => x.Name == name);
+        }
     }
 }
